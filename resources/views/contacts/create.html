@@ -1,0 +1,22 @@
+<h1>Adicionar Contato</h1>
+<?php if (isset($errors)): ?>
+    <?php foreach ($errors as $field => $messages): ?>
+        <div class="error"><?php echo $messages[0]; ?></div>
+    <?php endforeach; ?>
+<?php endif; ?>
+<form action="/contacts" method="POST">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <div>
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name" value="<?php echo old('name'); ?>">
+    </div>
+    <div>
+        <label for="contact">Contato</label>
+        <input type="text" name="contact" id="contact" value="<?php echo old('contact'); ?>">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="<?php echo old('email'); ?>">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
