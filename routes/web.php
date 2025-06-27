@@ -14,4 +14,4 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rotas do recurso de contatos
-Route::resource('contacts', ContactController::class);
+Route::resource('contact', ContactController::class);
