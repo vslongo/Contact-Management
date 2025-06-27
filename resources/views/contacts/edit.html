@@ -1,0 +1,23 @@
+<h1>Editar Contato</h1>
+<?php if (isset($errors)): ?>
+    <?php foreach ($errors as $field => $messages): ?>
+        <div class="error"><?php echo $messages[0]; ?></div>
+    <?php endforeach; ?>
+<?php endif; ?>
+<form action="/contacts/<?php echo $contact->id; ?>" method="POST">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <input type="hidden" name="_method" value="PUT">
+    <div>
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name" value="<?php echo old('name', $contact->name); ?>">
+    </div>
+    <div>
+        <label for="contact">Contato</label>
+        <input type="text" name="contact" id="contact" value="<?php echo old('contact', $contact->contact); ?>">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="<?php echo old('email', $contact->email); ?>">
+    </div>
+    <button type="submit" class="btn btn-primary">Atualizar</button>
+</form>
