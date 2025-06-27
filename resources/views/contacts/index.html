@@ -1,16 +1,37 @@
-<h1>Login</h1>
-<?php if (isset($errors['email'])): ?>
-    <div class="error"><?php echo $errors['email'][0]; ?></div>
+<h1>Lista de Contatos</h1>
+<?php if (count($contacts) > 0): ?>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Contato</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($contacts as $contact): ?>
+                <tr>
+                    <td><?php echo $contact->id; ?></td>
+                    <td><?php echo $contact->name; ?></td>
+                    <td><?php echo $contact->contact; ?></td>
+                    <td><?php echo $contact->email; ?></td>
+                    <td>
+                        <a href="/contacts/<?php echo $contact->id; ?>" class="btn btn-info">Ver</a>
+                        <?php if (auth()->check()): ?>
+                            <a href="/contacts/<?php echo $contact->id; ?>/edit" class="btn btn-primary">Editar</a>
+                            <form action="/contacts/<?php echo $contact->id; ?>" method="POST" style="display:inline;">
+                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</button>
+                            </form>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p>Nenhum contato encontrado.</p>
 <?php endif; ?>
-<form action="/login" method="POST">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-    <div>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?php echo old('email'); ?>">
-    </div>
-    <div>
-        <label for="password">Senha</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-</form>
