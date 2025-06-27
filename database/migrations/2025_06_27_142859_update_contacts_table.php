@@ -6,19 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        //
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->string('name')->after('id');
+            $table->string('contact', 9)->unique()->after('name');
+            $table->string('email')->unique()->after('contact');
+            $table->softDeletes()->after('updated_at');
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        //
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->dropColumn(['name', 'contact', 'email']);
+            $table->dropSoftDeletes();
+        });
     }
 };
