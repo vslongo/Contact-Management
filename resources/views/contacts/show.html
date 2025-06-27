@@ -1,0 +1,15 @@
+<h1>Detalhes do Contato</h1>
+<div>
+    <p><strong>ID:</strong> <?php echo $contact->id; ?></p>
+    <p><strong>Nome:</strong> <?php echo $contact->name; ?></p>
+    <p><strong>Contato:</strong> <?php echo $contact->contact; ?></p>
+    <p><strong>Email:</strong> <?php echo $contact->email; ?></p>
+    <?php if (auth()->check()): ?>
+        <a href="/contacts/<?php echo $contact->id; ?>/edit" class="btn btn-primary">Editar</a>
+        <form action="/contacts/<?php echo $contact->id; ?>" method="POST" style="display:inline;">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</button>
+        </form>
+    <?php endif; ?>
+</div>
