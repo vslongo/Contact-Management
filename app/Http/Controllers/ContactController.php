@@ -16,12 +16,12 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::all();
-        return $this->renderHtml('contacts/index.html', ['contacts' => $contacts]);
+        return $this->renderHtml('contact/index.html', ['contacts' => $contacts]);
     }
 
     public function create()
     {
-        return $this->renderHtml('contacts/create.html');
+        return $this->renderHtml('contact/create.html');
     }
 
     public function store(Request $request)
@@ -33,17 +33,17 @@ class ContactController extends Controller
         ]);
 
         Contact::create($validated);
-        return redirect()->route('contacts.index')->with('success', 'Contato criado com sucesso!');
+        return redirect()->route('contact.index')->with('success', 'Contato criado com sucesso!');
     }
 
     public function show(Contact $contact)
     {
-        return $this->renderHtml('contacts/show.html', ['contact' => $contact]);
+        return $this->renderHtml('contact/show.html', ['contact' => $contact]);
     }
 
     public function edit(Contact $contact)
     {
-        return $this->renderHtml('contacts/edit.html', ['contact' => $contact]);
+        return $this->renderHtml('contact/edit.html', ['contact' => $contact]);
     }
 
     public function update(Request $request, Contact $contact)
@@ -55,13 +55,13 @@ class ContactController extends Controller
         ]);
 
         $contact->update($validated);
-        return redirect()->route('contacts.index')->with('success', 'Contato atualizado com sucesso!');
+        return redirect()->route('contact.index')->with('success', 'Contato atualizado com sucesso!');
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->route('contacts.index')->with('success', 'Contato deletado com sucesso!');
+        return redirect()->route('contact.index')->with('success', 'Contato deletado com sucesso!');
     }
 
     protected function renderHtml($viewPath, $data = [])
